@@ -14,11 +14,13 @@
     "dev:payment": "npm run dev --workspace=payment-service"
   },
   "devDependencies": {
+    "prisma": "^6.19.3",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   },
   "dependencies": {
+    "@prisma/client": "^6.19.3",
     "express": "^5.2.1"
   }
 }

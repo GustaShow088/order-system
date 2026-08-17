@@ -1,0 +1,33 @@
+### Health Check - Gateway
+GET http://localhost:3000/health
+
+### Health Check - Order Service
+GET http://localhost:3001/health
+
+### Criar usuário
+POST http://localhost:3001/users
+Content-Type: application/json
+
+{
+  "email": "teste@teste.com",
+  "name": "Teste"
+}
+
+### Criar pedido (substitua o userId pelo ID retornado acima)
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{
+  "userId": "COLE_O_ID_AQUI",
+  "total": 150.00,
+  "items": [
+    {
+      "productName": "Camiseta",
+      "quantity": 2,
+      "price": 75.00
+    }
+  ]
+}
+
+### Listar pedidos do usuário
+GET http://localhost:3001/users/COLE_O_ID_AQUI/orders

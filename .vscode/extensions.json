@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "prisma.prisma",
+    "ms-azuretools.vscode-docker",
+    "rangav.vscode-thunder-client",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "pkief.material-icon-theme",
+    "mikestead.dotenv",
+    "wayou.vscode-todo-highlight"
+  ]
+}
