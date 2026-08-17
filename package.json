@@ -1,0 +1,24 @@
+{
+  "name": "order-system",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "gateway",
+    "order-service",
+    "payment-service",
+    "shared"
+  ],
+  "scripts": {
+    "dev:gateway": "npm run dev --workspace=gateway",
+    "dev:order": "npm run dev --workspace=order-service",
+    "dev:payment": "npm run dev --workspace=payment-service"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
