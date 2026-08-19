@@ -4,6 +4,40 @@ GET http://localhost:3000/health
 ### Health Check - Order Service
 GET http://localhost:3001/health
 
+### Criar usuário (via Gateway)
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "email": "maria@email.com",
+  "name": "Maria"
+}
+
+### Criar pedido (via Gateway) — vai disparar o evento na fila
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "userId": "15b04b9b-ddeb-4d71-b61d-77ac683839be",
+  "total": 199.90,
+  "items": [
+    {
+      "productName": "Tênis",
+      "quantity": 1,
+      "price": 199.90
+    }
+  ]
+}
+
+### Criar usuário VIA GATEWAY (porta 3000!)
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "email": "via-gateway@teste.com",
+  "name": "Teste Gateway"
+}
+
 ### Criar usuário
 POST http://localhost:3001/users
 Content-Type: application/json
@@ -18,7 +52,7 @@ POST http://localhost:3001/orders
 Content-Type: application/json
 
 {
-  "userId": "COLE_O_ID_AQUI",
+  "userId": "f9aa55e7-2a46-4159-a9e4-d4db01dddceb",
   "total": 150.00,
   "items": [
     {

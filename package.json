@@ -14,14 +14,20 @@
     "dev:payment": "npm run dev --workspace=payment-service"
   },
   "devDependencies": {
+    "@types/bull": "^3.15.9",
+    "@types/jest": "^30.0.0",
+    "jest": "^30.4.2",
     "prisma": "^6.19.3",
+    "ts-jest": "^29.4.12",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.12",
-    "typescript": "^7.0.2"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
+    "bull": "^4.16.5",
     "express": "^5.2.1",
+    "http-proxy-middleware": "^4.2.0",
     "ioredis": "^6.0.0"
   }
 }

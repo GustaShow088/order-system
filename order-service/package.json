@@ -5,5 +5,8 @@
     "dev": "tsx watch src/server.ts",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   }
 }

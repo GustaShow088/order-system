@@ -1,47 +1,54 @@
 import express from 'express';
-import { randomUUID } from 'crypto';
 import { prisma } from './prisma';
-import { publishOrderCreated } from './queue';
+import { publishOrderCreated } from './queues/order.queue';
 
 const app = express();
 app.use(express.json());
 
 // Criar usuário
 app.post('/users', async (req, res) => {
-  const user = await prisma.user.create({
-    data: req.body,
-  });
-  res.json(user);
+  try {
+    const user = await prisma.user.create({
+      data: req.body,
+    });
+    res.status(201).json(user);
+  } catch (error: any) {
+    if (error.code === 'P2002') {
+      res.status(409).json({ error: 'Email already exists' });
+    } else {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
 });
 
-// Criar pedido com itens + publicar evento na fila
+// Criar pedido com itens
 app.post('/orders', async (req, res) => {
   const { userId, items, total } = req.body;
 
-  const order = await prisma.order.create({
-    data: {
-      userId,
-      total,
-      items: {
-        create: items,
+  try {
+    const order = await prisma.order.create({
+      data: {
+        userId,
+        total,
+        items: {
+          create: items,
+        },
       },
-    },
-    include: {
-      items: true,
-      user: true,
-    },
-  });
+      include: {
+        items: true,
+        user: true,
+      },
+    });
 
-  // Publica o evento para o payment-service processar
-  await publishOrderCreated({
-    eventId: randomUUID(),
-    orderId: order.id,
-    userId: order.userId,
-    total: Number(order.total),
-    createdAt: order.createdAt.toISOString(),
-  });
+    await publishOrderCreated(order.id, userId);
+    console.log(`Evento order.created publicado para o pedido ${order.id}`);
 
-  res.status(201).json(order);
+    res.status(201).json(order);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to create order' });
+  }
 });
 
 // Listar pedidos de um usuário
