@@ -3,6 +3,7 @@ import './workers/payment.worker';
 
 const app = express();
 
+// Health check
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', service: 'payment-service' });
 });
