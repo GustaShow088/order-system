@@ -6,11 +6,12 @@ const PORT = process.env.PORT || 3000;
 
 const ORDER_SERVICE_URL = process.env.ORDER_SERVICE_URL || 'http://localhost:3001';
 
-app.get('/health', (_req, res) => {
+app.get('/', (_req, res) => {
   res.json({
-    status: 'ok',
-    service: 'gateway',
-    timestamp: new Date().toISOString(),
+    service: 'order-system-gateway',
+    status: 'running',
+    endpoints: ['/health', '/api/users', '/api/orders'],
+    docs: 'https://github.com/GustaShow088/order-system'
   });
 });
 
