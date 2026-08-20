@@ -22,6 +22,10 @@ Sistema de pedidos em microsserviços com TypeScript, Node.js, PostgreSQL, Redis
 | Jest                    | Testes unitários                        |
 | GitHub Actions          | CI/CD automatizado                      |
 
+## Deploy
+
+- **Gateway**: [https://order-system-gateway.onrender.com](https://order-system-gateway.onrender.com)
+
 ## Como rodar localmente
 
 ```bash
