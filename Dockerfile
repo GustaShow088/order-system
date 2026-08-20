@@ -2,22 +2,22 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copia o package.json da raiz (tem as dependências do monorepo)
-COPY ../package.json ../package-lock.json ./
+# Copia as dependências da raiz do monorepo
+COPY package.json package-lock.json ./
 RUN npm ci
 
-# Copia o código do gateway
+# Copia todo o código
 COPY . .
 
-# Builda
-RUN npx tsc --project tsconfig.json
+# Builda o gateway
+RUN cd gateway && npx tsc
 
 FROM node:22-alpine
 
 WORKDIR /app
 
 # Copia apenas o necessário para produção
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/gateway/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./
 
