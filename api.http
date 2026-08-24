@@ -71,5 +71,24 @@ Content-Type: application/json
   ]
 }
 
+### Health check (público, sem token)
+GET http://localhost:3000/health
+
+### Criar usuário (público, passa pelo rate limit)
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "email": "teste-limit@email.com",
+  "name": "Teste"
+}
+
+### Rota protegida (SEM token — deve dar 401)
+GET http://localhost:3000/api/protected/orders
+
+### Rota protegida (COM token — deve passar)
+GET http://localhost:3000/api/protected/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjMifQ.lPOKIyE8eForpYvYpkulqFNSHtq-TWn3bkOoAxqwQAg
+
 ### Listar pedidos do usuário
 GET http://localhost:3001/users/COLE_O_ID_AQUI/orders
